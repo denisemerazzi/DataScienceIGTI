@@ -1,5 +1,5 @@
-#Exercício 1 de estatística computacional com R - IGTI
-
+#ExercÃ­cio 1 de estatÃ­stica computacional com R - IGTI
+#
 #Forma o conjunto de dados historico contendo vinte locacoes sorteadas aleatoriamente do banco de dados e a armazena
 #em um data frame chamado dados
 
@@ -45,87 +45,87 @@ dados <- data.frame(
 View(dados)
 
 
-#Variável resposta em função do preço: Histograma do preço:
-#Observa-se aqui que o gráfico apresenta uma distribuição normal
-#Os dados são distribuídos em torno do eixo central
+#VariÃ¡vel resposta em funÃ§Ã£o do preÃ§o: Histograma do preÃ§o:
+#Observa-se aqui que o grÃ¡fico apresenta uma distribuiÃ§Ã£o normal
+#Os dados sÃ£o distribuÃ­dos em torno do eixo central
 hist(dados$Preco)
 
-#Boxplot do preco: é possível observar um outlier superior e um inferior; 
-#Existe uma locação que o preço foi muito acima do esperado e uma locação cujo preço foi muito abaixo do esperado 
+#Boxplot do preco: Ã© possÃ­vel observar um outlier superior e um inferior; 
+#Existe uma locaÃ§Ã£o que o preÃ§o foi muito acima do esperado e uma locaÃ§Ã£o cujo preÃ§o foi muito abaixo do esperado 
 boxplot(dados$Preco)
 
-#Estatisticas descritivas do preço:
-# A mediana indica que o preço varia 50% abaixo e 50% acima de 447,8
+#Estatisticas descritivas do preÃ§o:
+# A mediana indica que o preÃ§o varia 50% abaixo e 50% acima de 447,8
 summary(dados$Preco)
 
 
 #Boxplot entre o Preco e Quadrimestre
-#O preço do primeiro quadrimestre apresenta a maior mediana
+#O preÃ§o do primeiro quadrimestre apresenta a maior mediana
 boxplot(dados$Preco~ dados$Quadrimestre)
 
-#Análise de variancia
-# Rejeita-se a hipótese nula, quando pvalue menor que alfa
-# A hipótese nula nos diz que não existe relação entre as variávies
-# Condiderando-se um alfa de 95% de confiança (alfa=0,05):
+#AnÃ¡lise de variancia
+# Rejeita-se a hipÃ³tese nula, quando pvalue menor que alfa
+# A hipÃ³tese nula nos diz que nÃ£o existe relaÃ§Ã£o entre as variÃ¡vies
+# Condiderando-se um alfa de 95% de confianÃ§a (alfa=0,05):
 # Observa-se pvalue=0,000126, ou seja, menor que alfa:
-# Há evidências para rejeitar a hipótese nula das médias, ou seja:
-# Pelo menos um dos quadrimestres possui o preço médio diferente dos demais. 
+# HÃ¡ evidÃªncias para rejeitar a hipÃ³tese nula das mÃ©dias, ou seja:
+# Pelo menos um dos quadrimestres possui o preÃ§o mÃ©dio diferente dos demais. 
 anova <- aov(Preco ~ Quadrimestre, data = dados)
 summary(anova)
 
-#Explore a relação entre as variáveis Preço e Portas, responda:
+#Explore a relaÃ§Ã£o entre as variÃ¡veis PreÃ§o e Portas, responda:
 
 boxplot(dados$Preco ~ dados$Portas)
 
-#Test t de Student: Preços e portas:
-#Considerando 95% de confiança o valor do pvalue=0,88884 (88,8%) é maior que alfa
-#Não há evidências para rejeitar a hipótese nula de igualdade de médias
-#Não existe diferença significativa entre o preço médio do aluguel do veículo com duas portas 
-#Em relação (comparação) com o preço médio do veículo de quatro portas
+#Test t de Student: PreÃ§os e portas:
+#Considerando 95% de confianÃ§a o valor do pvalue=0,88884 (88,8%) Ã© maior que alfa
+#NÃ£o hÃ¡ evidÃªncias para rejeitar a hipÃ³tese nula de igualdade de mÃ©dias
+#NÃ£o existe diferenÃ§a significativa entre o preÃ§o mÃ©dio do aluguel do veÃ­culo com duas portas 
+#Em relaÃ§Ã£o (comparaÃ§Ã£o) com o preÃ§o mÃ©dio do veÃ­culo de quatro portas
 t.test(dados$Preco ~ dados$Portas , 
        paired = FALSE, #amostras nao pareadas
        alternative = 'two.sided', #bilateral
        conf.level = 0.95 #95% de confianca
 )
 
-#Relação entre as variáveis Preço e Quilometragem:
-#Pelo gráfico de dispersão, identifica-se que existe a relação linear entre o Preço e a Quilometragem
-#Essa relação é linear negativa, pois à medida que a quilometragem aumenta o preço diminui. 
+#RelaÃ§Ã£o entre as variÃ¡veis PreÃ§o e Quilometragem:
+#Pelo grÃ¡fico de dispersÃ£o, identifica-se que existe a relaÃ§Ã£o linear entre o PreÃ§o e a Quilometragem
+#Essa relaÃ§Ã£o Ã© linear negativa, pois Ã  medida que a quilometragem aumenta o preÃ§o diminui. 
 
 plot(y = dados$Preco ,
      x = dados$Quilometragem,
      pch = 16)
 
 #Coeficiente de correlacao
-#o valor do coeficiente de correlação linear de Pearson entre o Preço e a Quilometragem
-#é de -0,82,isso nos informa que é uma correlação negativa alta.
+#o valor do coeficiente de correlaÃ§Ã£o linear de Pearson entre o PreÃ§o e a Quilometragem
+#Ã© de -0,82,isso nos informa que Ã© uma correlaÃ§Ã£o negativa alta.
 cor(dados$Preco, dados$Quilometragem)
 
 #Regressao linear do Preco em funcao da Quilometragem
-# O R2 é de 67,76%, ou seja, a variável Quilometragem consegue explicar 67,76% da variação do Preço.
+# O R2 Ã© de 67,76%, ou seja, a variÃ¡vel Quilometragem consegue explicar 67,76% da variaÃ§Ã£o do PreÃ§o.
 regressao_linear <- lm(Preco ~ Quilometragem, data = dados)
 summary(regressao_linear)
 
 #Analise descritiva da variavel quilometragem
-# O primeiro quartil é 554,7, isso nos diz que até 25% dos veículos alugados possuem quilometragem até 554,7.
-# Oterceiro quartil é 925,2, isso nos diz que até 75% dos veículos alugados possuem quilometragem até 925,2.
+# O primeiro quartil Ã© 554,7, isso nos diz que atÃ© 25% dos veÃ­culos alugados possuem quilometragem atÃ© 554,7.
+# Oterceiro quartil Ã© 925,2, isso nos diz que atÃ© 75% dos veÃ­culos alugados possuem quilometragem atÃ© 925,2.
 
 summary(dados$Quilometragem)
 
 #Coeficiente de variacao
-#O coeficiente de variação é 27,74%, ou seja, 
-#os valores da variável quilometragem variam em média 27,74% em torno de sua média.
+#O coeficiente de variaÃ§Ã£o Ã© 27,74%, ou seja, 
+#os valores da variÃ¡vel quilometragem variam em mÃ©dia 27,74% em torno de sua mÃ©dia.
 sd(dados$Quilometragem) / mean(dados$Quilometragem)
 
 #Explore a correlacao entre o Dolar e o Preco
-#O gráfico de dispersão não apresenta nenhum padrão entre as duas variáveis, ou seja, na medida que o Dólar aumenta,
-#o Preço não cresce nem decresce, ou seja, não há correlação entre as duas variáveis.
-#O valor do coeficiente de correlação linear de Pearson é -0,06 (próximo do zero), que indica ausência de correlação linear.
-#Não é possível prever o preço com base no dólar:
-#Não seria possível, pois o p valor do coeficiente beta do Dolar é de 0,77 (77%), ou seja, 
-#independente do nível de significância adotado, 
-#a variável Dolar não exerce influência significativa na variável Preco,
-#portanto, não é possível prever o Preço baseado no Dólar.
+#O grÃ¡fico de dispersÃ£o nÃ£o apresenta nenhum padrÃ£o entre as duas variÃ¡veis, ou seja, na medida que o DÃ³lar aumenta,
+#o PreÃ§o nÃ£o cresce nem decresce, ou seja, nÃ£o hÃ¡ correlaÃ§Ã£o entre as duas variÃ¡veis.
+#O valor do coeficiente de correlaÃ§Ã£o linear de Pearson Ã© -0,06 (prÃ³ximo do zero), que indica ausÃªncia de correlaÃ§Ã£o linear.
+#NÃ£o Ã© possÃ­vel prever o preÃ§o com base no dÃ³lar:
+#NÃ£o seria possÃ­vel, pois o p valor do coeficiente beta do Dolar Ã© de 0,77 (77%), ou seja, 
+#independente do nÃ­vel de significÃ¢ncia adotado, 
+#a variÃ¡vel Dolar nÃ£o exerce influÃªncia significativa na variÃ¡vel Preco,
+#portanto, nÃ£o Ã© possÃ­vel prever o PreÃ§o baseado no DÃ³lar.
 plot(y = dados$Preco,
      x = dados$Dolar,
      pch = 16)
